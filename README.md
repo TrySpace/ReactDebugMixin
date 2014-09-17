@@ -23,13 +23,13 @@ In your componentWillMount, call:
 ### Attrs ###
 
 * componentName
---* this is the name of the component, for reference, you can give any name you like
+⋅⋅* this is the name of the component, for reference, you can give any name you like
 
 * stateKey
---* optional attribute to output a specific `this.state[stateKey]` in each stage
+⋅⋅* optional attribute to output a specific `this.state[stateKey]` in each stage
 
 * collapseBool
---* optional boolean to collapse the console.groups
+⋅⋅* optional boolean to collapse the console.groups
 
 Example:
 
