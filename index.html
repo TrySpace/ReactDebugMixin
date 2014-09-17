@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Reactdebugmixin by TrySpace</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Reactdebugmixin</h1>
+        <h2> React.js Debug mixin, for creating a nested visual representation in your developer console.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/TrySpace/ReactDebugMixin/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/TrySpace/ReactDebugMixin/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/TrySpace/ReactDebugMixin" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="reactdebugmixin" class="anchor" href="#reactdebugmixin"><span class="octicon octicon-link"></span></a>ReactDebugMixin</h1>
+
+<p>A simple React.js Debug mixin, for creating a nested visual representation in your developer console.</p>
+
+<h3>
+<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why?</h3>
+
+<p>This mixin will create console.groups automatically for each component Stage(Like DidMount or WillUpdate), to visualize what is happening with your component(s)
+It also tracks the time it takes between initial Mount and subsequent Updates of the component (through console.time)</p>
+
+<h3>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<p>Include the mixin:</p>
+
+<pre><code>mixins: [ReactDebugMixin]
+</code></pre>
+
+<h3>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use?</h3>
+
+<p>In your componentWillMount, call:</p>
+
+<pre><code>this.debug(componentName, stateKey, collapseBool)
+</code></pre>
+
+<h3>
+<a name="attrs" class="anchor" href="#attrs"><span class="octicon octicon-link"></span></a>Attrs</h3>
+
+<ul>
+<li><p><em>componentName</em> - This is the name of the component for reference. You can give any name you like</p></li>
+<li><p><em>stateKey</em> - Optional attribute to output a specific <code>this.state[stateKey]</code> in each stage</p></li>
+<li><p><em>collapseBool</em> - Optional boolean to collapse the console.groups</p></li>
+</ul><p>Example:</p>
+
+<pre><code>this.debug("slideShowImage", "currentImage", false)
+</code></pre>
+
+<h3>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h3>
+
+<p>Only state is included as an optional attribute, because states are supposed to change a lot, whereas props should be changed sparingly. And only displaying one state key, will help devs to focus on one thing at a time.
+Although, because the groups are mosty spread across different component stages, anything console.logged in between will be visually nested inside these states, to get a good overview of what is happening.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
