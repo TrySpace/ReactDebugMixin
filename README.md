@@ -4,7 +4,7 @@ A simple React.js Debug mixin, for creating a nested visual representation in yo
 
 ### Why? ##
 
-This mixin will create console.groups automatically for each component Stage, to visualize what is happening with your component(s)
+This mixin will create console.groups automatically for each component Stage(Like DidMount or WillUpdate), to visualize what is happening with your component(s)
 It also tracks the time it takes between initial Mount and subsequent Updates of the component (through console.time)
 
 ### Setup ###
