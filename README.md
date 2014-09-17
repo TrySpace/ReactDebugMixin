@@ -22,11 +22,11 @@ In your componentWillMount, call:
 
 ### Attrs ###
 
-* _componentName_ - this is the name of the component, for reference, you can give any name you like
+* _componentName_ - This is the name of the component for reference. You can give any name you like
 
-* _stateKey_ - optional attribute to output a specific `this.state[stateKey]` in each stage
+* _stateKey_ - Optional attribute to output a specific `this.state[stateKey]` in each stage
 
-* _collapseBool_ - optional boolean to collapse the console.groups
+* _collapseBool_ - Optional boolean to collapse the console.groups
 
 Example:
 
