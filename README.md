@@ -1,8 +1,8 @@
 # ReactDebugMixin #
 
-A React.js Debug mixin, for creating a nested visual representation in your developer console.
+A simple React.js Debug mixin, for creating a nested visual representation in your developer console.
 
-### Why ? ##
+### Why? ##
 
 This mixin will create console.groups automatically for each component Stage, to visualize what is happening with your component(s)
 It also tracks the time it takes between initial Mount and subsequent Updates of the component (through console.time)
@@ -23,13 +23,13 @@ In your componentWillMount, call:
 ### Attrs ###
 
 * componentName
-** this is the name of the component, for reference, you can give any name you like
+- this is the name of the component, for reference, you can give any name you like
 
 * stateKey
-** optional attribute to output a specific `this.state[stateKey]` in each stage
+- optional attribute to output a specific `this.state[stateKey]` in each stage
 
 * collapseBool
-** optional boolean to collapse the console.groups
+- optional boolean to collapse the console.groups
 
 ### Notes ###
 
