@@ -2,12 +2,14 @@ var ReactDebugMixin = {
 
   componentWillMount: function() {
   	this._consoleCheck();
-	    this.debugUpdateCount = 0;
-	    time("MountTime")
+	this.debugUpdateCount = 0;
+	this._debugOn = false;
+
   },
 
   debug: function(name, extra, collapse){
   	// name must be string
+  	this._debugOn = true;
   	if(typeof name === "undefined"){
   		err("ReactDebug: No name given: `this.debug(`componentName`, `stateKey`)`, defaulting to `componentName`")
   	}
@@ -15,6 +17,7 @@ var ReactDebugMixin = {
   	this.stateKey = extra ? extra : "undefined";
   	this.collapsed = collapse ? true : false;
   	this.collapsed ? grpC(this.componentName+" Will Mount: ") : grp(this.componentName+" Will Mount: ")
+  	time("MountTime: "+this.componentName);
   },
 
   extra: function(){
@@ -28,47 +31,59 @@ var ReactDebugMixin = {
   },
 
   componentDidMount: function(){
-  	this.collapsed ? grpC(this.componentName+" Did Mount: ") : grp(this.componentName+" Did Mount: ")
-  		this.debugmounted = true;
-  		timeE("MountTime")
-  		this.extra();
-  	grpE(this.componentName+" Did Mount: ")
-  	grpE(this.componentName+" Will Mount: ")
+
+  	if(this._debugOn){
+	  	this.collapsed ? grpC(this.componentName+" Did Mount: ") : grp(this.componentName+" Did Mount: ")
+	  		this.debugmounted = true;
+
+	  		this.extra();
+	  	grpE(this.componentName+" Did Mount: ")
+	  	grpE(this.componentName+" Will Mount: ")
+	  	timeE("MountTime: "+this.componentName);
+	}
   },
 
   componentWillReceiveProps: function(nextProps) {
-  	this.collapsed ? grpC(this.componentName+" Will Receive Props: ") : grp(this.componentName+" Will Receive Props: ")
-  		log("next Props: %O", nextProps)
-  		this.extra();
+  	if(this._debugOn){
+	  	this.collapsed ? grpC(this.componentName+" Will Receive Props: ") : grp(this.componentName+" Will Receive Props: ")
+	  		log("next Props: %O", nextProps)
+	  		this.extra();
+	 }
   },
 
   componentWillUpdate: function(nextProps, nextState){
-  	this.collapsed ? grpC(this.componentName+" Will Update: ") : grp(this.componentName+" Will Update: ")
-  		log("next Props: %O", nextProps)
-  		log("next State: %O", nextState)
-  		this.extra();
-	  	time("UpdateTime")
+  	if(this._debugOn){
+	  	this.collapsed ? grpC(this.componentName+" Will Update: ") : grp(this.componentName+" Will Update: ")
+	  		log("next Props: %O", nextProps)
+	  		log("next State: %O", nextState)
+	  		this.extra();
+		  	time("UpdateTime: "+this.componentName);
+	}
   },
 
   componentDidUpdate: function(prevProps, prevState){
-  	grpE(this.componentName+" Will Receive Props: ")
-  	grpE(this.componentName+" Will Update: ")
+  	if(this._debugOn){
+	  	grpE(this.componentName+" Will Receive Props: ")
+	  	grpE(this.componentName+" Will Update: ")
 
-  	this.collapsed ? grpC(this.componentName+" Did Update: ") : grp(this.componentName+" Did Update: ")
-  		timeE("UpdateTime")
-	  	this.debugUpdateCount++;
-	    log("UpdateCounter: "+this.debugUpdateCount)
-	    log("previous Props: %O", prevProps)
-	    log("previous State: %O", prevState)
-	    this.extra();
-	grpE(this.componentName+" Did Update: ")
+	  	this.collapsed ? grpC(this.componentName+" Did Update: ") : grp(this.componentName+" Did Update: ")
+	  		timeE("UpdateTime: "+this.componentName);
+		  	this.debugUpdateCount++;
+		    log("UpdateCounter: "+this.debugUpdateCount)
+		    log("previous Props: %O", prevProps)
+		    log("previous State: %O", prevState)
+		    this.extra();
+		grpE(this.componentName+" Did Update: ")
+	}
   },
 
   componentWillUnmount: function() {
-  	this.collapsed ? grpC(this.componentName+" Will Unmount: ") : grp(this.componentName+" Will Unmount: ")
-    	log("Total UpdateCounter: "+this.debugUpdateCount)
-    	this.extra();
-    grpE(this.componentName+" Will Unmount: ")
+  	if(this._debugOn){
+	  	this.collapsed ? grpC(this.componentName+" Will Unmount: ") : grp(this.componentName+" Will Unmount: ")
+	    	log("Total UpdateCounter: "+this.debugUpdateCount)
+	    	this.extra();
+	    grpE(this.componentName+" Will Unmount: ")
+	}
   },
   _consoleCheck: function(){
   	// Avoid `console` errors in browsers that lack a console.
