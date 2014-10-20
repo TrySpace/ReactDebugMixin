@@ -14,7 +14,7 @@ var ReactDebugMixin = {
   	this.componentName = name ? name : 'componentName';
   	this.stateKey = extra ? extra : "_x_EMPTY_x_";
   	this.collapsed = collapse ? true : false;
-  	this.collapsed ? grpC(this.componentName+" Will Mount: ") : grp(this.componentName+" Will Mount: ")
+  	this.collapsed ? grpC(this.componentName+" Will Mount: ", this.props) : grp(this.componentName+" Will Mount: ")
   },
 
   extra: function(){
@@ -28,12 +28,12 @@ var ReactDebugMixin = {
   },
 
   componentDidMount: function(){
-  	this.collapsed ? grpC(this.componentName+" Did Mount: ") : grp(this.componentName+" Did Mount: ")
+  	grpE(this.componentName+" Will Mount: ")
+  	this.collapsed ? grpC(this.componentName+" Did Mount: ", this.props) : grp(this.componentName+" Did Mount: ")
   		this.debugmounted = true;
   		timeE("MountTime")
   		this.extra();
-  	grpE(this.componentName+" Did Mount: ")
-  	grpE(this.componentName+" Will Mount: ")
+  	this.collapsed ? grpE(this.componentName+" Did Mount: ", this.props) : grp(this.componentName+" Did Mount: ")
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -43,7 +43,7 @@ var ReactDebugMixin = {
   },
 
   componentWillUpdate: function(nextProps, nextState){
-  	this.collapsed ? grpC(this.componentName+" Will Update: ") : grp(this.componentName+" Will Update: ")
+  	this.collapsed ? grpC(this.componentName+" Will Update: ", nextState) : grp(this.componentName+" Will Update: ")
   		log("next Props: %O", nextProps)
   		log("next State: %O", nextState)
   		this.extra();
@@ -54,7 +54,7 @@ var ReactDebugMixin = {
   	grpE(this.componentName+" Will Receive Props: ")
   	grpE(this.componentName+" Will Update: ")
 
-  	this.collapsed ? grpC(this.componentName+" Did Update: ") : grp(this.componentName+" Did Update: ")
+  	this.collapsed ? grpC(this.componentName+" Did Update: ", prevState) : grp(this.componentName+" Did Update: ")
   		timeE("UpdateTime")
 	  	this.debugUpdateCount++;
 	    log("UpdateCounter: "+this.debugUpdateCount)
