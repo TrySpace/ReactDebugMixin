@@ -28,12 +28,12 @@ var ReactDebugMixin = {
   },
 
   componentDidMount: function(){
-  	grpE(this.componentName+" Will Mount: ")
+  	this.collapsed ? grpE(this.componentName+" Will Mount: ", this.props) : grpE(this.componentName+" Will Mount: ")
   	this.collapsed ? grpC(this.componentName+" Did Mount: ", this.props) : grp(this.componentName+" Did Mount: ")
   		this.debugmounted = true;
   		timeE("MountTime")
   		this.extra();
-  	this.collapsed ? grpE(this.componentName+" Did Mount: ", this.props) : grp(this.componentName+" Did Mount: ")
+  	this.collapsed ? grpE(this.componentName+" Did Mount: ", this.props) : grpE(this.componentName+" Did Mount: ")
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -77,6 +77,7 @@ var ReactDebugMixin = {
 
 	if(typeof console === 'undefined') {
 		var console = {};
+		console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
 	}
 
 	for(var i in methods) {
