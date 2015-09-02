@@ -1,3 +1,33 @@
+// Avoid `console` errors in browsers that lack a console.
+var fallback = function() {};
+var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'profile', 'profileEnd', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn', 'table'];
+
+if(typeof console === 'undefined') {
+	var console = {};
+	console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
+}
+
+for(var i in methods) {
+	if(typeof console[methods[i]] === 'undefined') {
+		console[methods[i]] = fallback;
+	}
+}
+// Define Console Aliases
+var log =     console.log             .bind(console);
+var nfo =     console.info            .bind(console);
+var warn =    console.warn            .bind(console);
+var err =     console.error           .bind(console);
+var table =   console.table           .bind(console);
+var dir =     console.dir             .bind(console);
+var cnt =     console.count           .bind(console);
+var time =    console.time            .bind(console);
+var timeE =   console.timeEnd         .bind(console);
+var grp =     console.group           .bind(console);
+var grpE =    console.groupEnd        .bind(console);
+var grpC =    console.groupCollapsed  .bind(console);
+
+
+
 var ReactDebugMixin = {
 
   componentWillMount: function() {
@@ -69,35 +99,5 @@ var ReactDebugMixin = {
     	log("Total UpdateCounter: "+this.debugUpdateCount)
     	this.extra();
     grpE(this.componentName+" Will Unmount: ")
-  },
-  _consoleCheck: function(){
-  	// Avoid `console` errors in browsers that lack a console.
-	var fallback = function() {};
-	var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'profile', 'profileEnd', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn', 'table'];
-
-	if(typeof console === 'undefined') {
-		var console = {};
-		console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
-	}
-
-	for(var i in methods) {
-		if(typeof console[methods[i]] === 'undefined') {
-			console[methods[i]] = fallback;
-		}
-	}
-	// Console Aliases
-	var log =     console.log             .bind(console);
-	var nfo =     console.info            .bind(console);
-	var warn =    console.warn            .bind(console);
-	var err =     console.error           .bind(console);
-	var table =   console.table           .bind(console);
-	var dir =     console.dir             .bind(console);
-	var cnt =     console.count           .bind(console);
-	var time =    console.time            .bind(console);
-	var timeE =   console.timeEnd         .bind(console);
-	var grp =     console.group           .bind(console);
-	var grpE =    console.groupEnd        .bind(console);
-	var grpC =    console.groupCollapsed  .bind(console);
   }
-
 };
